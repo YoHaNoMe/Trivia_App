@@ -80,3 +80,118 @@ Pay special attention to what data the frontend is expecting from each API respo
   ]
 }
 ```
+## GET /questions
+- It will return Categories, Questions, Total_Questions
+- You have to specify The required query parameter, which is ***page***
+- If you did not specify the required query parameter you will get a ***Bad Request***
+### GET /questions?page={page_number}
+- If the page number is not found, you will get ***Not Found*** . please refer to Error Handling section
+- Example: ``` curl http://127.0.0.1:5000/api/questions?page=1 ```
+```
+{
+  "categories": [
+    {
+      "id": 1,
+      "type": "Science"
+    },
+    {
+      "id": 2,
+      "type": "Art"
+    },
+    {
+      "id": 3,
+      "type": "Geography"
+    },
+    {
+      "id": 4,
+      "type": "History"
+    },
+    {
+      "id": 5,
+      "type": "Entertainment"
+    },
+    {
+      "id": 6,
+      "type": "Sports"
+    }
+  ],
+  "questions": [
+    {
+      "answer": "This is answer",
+      "category": "Entertainment",
+      "difficulty": 3,
+      "id": 7,
+      "question": "First question from React"
+    },
+    {
+      "answer": "alberto",
+      "category": "Geography",
+      "difficulty": 1,
+      "id": 10,
+      "question": "My question"
+    },
+    {
+      "answer": "alberot2",
+      "category": "Art",
+      "difficulty": 4,
+      "id": 11,
+      "question": "Another question"
+    },
+    {
+      "answer": "And here is the answer",
+      "category": "Entertainment",
+      "difficulty": 5,
+      "id": 15,
+      "question": "I added this question?"
+    }
+  ],
+  "status_code": 200,
+  "success": true,
+  "total_questions": 4
+}
+```
+### GET /questions?search={search_item}
+- If the search item doesn't match any question, you will get the expected result except that the ***questions*** and of course ***total_questions*** will be empty
+- Example: ``` curl http://127.0.0.1:5000/api/questions?search="f" ```
+```
+{
+  "categories": [
+    {
+      "id": 1,
+      "type": "Science"
+    },
+    {
+      "id": 2,
+      "type": "Art"
+    },
+    {
+      "id": 3,
+      "type": "Geography"
+    },
+    {
+      "id": 4,
+      "type": "History"
+    },
+    {
+      "id": 5,
+      "type": "Entertainment"
+    },
+    {
+      "id": 6,
+      "type": "Sports"
+    }
+  ],
+  "questions": [
+    {
+      "answer": "This is answer",
+      "category": "Entertainment",
+      "difficulty": 3,
+      "id": 7,
+      "question": "First question from React"
+    }
+  ],
+  "status_code": 200,
+  "success": true,
+  "total_questions": 1
+}
+```
