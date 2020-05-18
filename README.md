@@ -195,3 +195,48 @@ Pay special attention to what data the frontend is expecting from each API respo
   "total_questions": 1
 }
 ```
+## DELETE /questions/<question_id>
+- Delete an existing question
+- If the question id is wrong it will return ***Not Found***
+- If the question somehow cannot be removed from database it return ***Not processable***
+- Example: ``` curl http://127.0.0.1:5000/api/questions/12 ```
+```
+{
+  "question_deleted_id": 12,
+  "success": true
+}
+```
+
+## POST /questions
+- Create new question
+- If you didn't specify question, answer, category_id and difficulty in the request body, you will get ***Bad Request***
+- If the category isn't found, you will get ***Not Found***
+- Example: ``` curl -X POST -H "Content-Type: application/json" -d '{"question": "This is question", "answer": "This is answer", "category_id": 1, "difficulty": 5}' http://127.0.0.1:5000/api/questions ```
+```
+{
+  "question_id": 16,
+  "status_code": 201,
+  "success": true
+}
+```
+
+## GET /categories/<category_id>/questions
+- Get all questions that related to specific category
+- If the category isn't found, you will get ***Not Found***
+- Example: ``` curl http://127.0.0.1:5000/api/categories/2/questions ```
+```
+{
+  "questions": [
+    {
+      "answer": "alberot2",
+      "category": "Art",
+      "difficulty": 4,
+      "id": 11,
+      "question": "Another question"
+    }
+  ],
+  "status_code": 200,
+  "success": true,
+  "total_questions": 1
+}
+```
