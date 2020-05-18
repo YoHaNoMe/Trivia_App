@@ -85,7 +85,7 @@ Pay special attention to what data the frontend is expecting from each API respo
 - You have to specify The required query parameter, which is ***page***
 - If you did not specify the required query parameter you will get a ***Bad Request***
 ### GET /questions?page={page_number}
-- If the page number is not found, you will get ***Not Found*** . please refer to Error Handling section
+- If the page number is not found, you will get ***Not Found*** . please refer to [Error Handling](https://github.com/YoHaNoMe/Trivia_App#error-handling) section
 - Example: ``` curl http://127.0.0.1:5000/api/questions?page=1 ```
 ```
 {
@@ -281,3 +281,14 @@ Pay special attention to what data the frontend is expecting from each API respo
   "success": true
 }
 ```
+## Error Handling
+```
+{
+  "message": "Not Found",
+  "status_code": 404,
+  "success": false
+}
+```
+- 400: Bad Request
+- 404: Not Found
+- 422: Not Processable
