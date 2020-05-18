@@ -242,7 +242,7 @@ Pay special attention to what data the frontend is expecting from each API respo
 ```
 ## GET /quizzes
 - Get a random question from specific category that you **HAVE** to specify in query parameters
-- If you didn't specify ``` category ``` in the query parameter, you will get ***Bad request***.
+- If you didn't specify ``` category ``` in the query parameter, you will get ***Bad request***. *Note: if* ```category``` *is 0, you will get a random question from all categories*
 - If you want to get a new random question you have to specify ``` prev_question``` in the query parameter, if you didn't specify ``` prev_question``` you will still get a random question but you may get the same question twice
 - If the given category isn't found **OR** doesn't have any questions, you will get ***Not Found***
 - Example: ``` curl http://127.0.0.1:5000/api/quizzes?category=1 ```

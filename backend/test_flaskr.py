@@ -107,7 +107,41 @@ class TriviaTestCase(unittest.TestCase):
         self.assertEqual(data['status_code'], 404)
         self.assertTrue(data['message'])
 
+    def test_get_random_question(self):
+        res = self.client().get('/api/quizzes?category=4')
+        data = json.loads(res.data)
+        self.assertTrue(data['success'])
+        self.assertEqual(data['status_code'], 200)
+        self.assertTrue(data['question'])
 
+    def test_get_random_question_with_wrong_category(self):
+        res = self.client().get('/api/quizzes?category=400')
+        data = json.loads(res.data)
+        self.assertFalse(data['success'])
+        self.assertEqual(data['status_code'], 404)
+        self.assertTrue(data['message'])
+
+    def test_get_random_question_from_category_that_doesnt_have_questions(self):
+        res = self.client().get('/api/quizzes?category=1')
+        data = json.loads(res.data)
+        self.assertFalse(data['success'])
+        self.assertEqual(data['status_code'], 404)
+        self.assertTrue(data['message'])
+
+    def test_get_random_question_with_prev_question_parameter(self):
+        res = self.client().get('/api/quizzes?category=4&prev_question=1')
+        data = json.loads(res.data)
+        self.assertTrue(data['success'])
+        self.assertEqual(data['status_code'], 200)
+        self.assertTrue(data['question'])
+
+
+    def test_get_random_question_with_wrong_prev_question_parameter(self):
+        res = self.client().get('/api/quizzes?category=4&prev_question=1000000')
+        data = json.loads(res.data)
+        self.assertFalse(data['success'])
+        self.assertEqual(data['status_code'], 404)
+        self.assertTrue(data['message'])
 
 # Make the tests conveniently executable
 if __name__ == "__main__":
