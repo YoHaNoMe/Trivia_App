@@ -240,3 +240,44 @@ Pay special attention to what data the frontend is expecting from each API respo
   "total_questions": 1
 }
 ```
+## GET /quizzes
+- Get a random question from specific category that you **HAVE** to specify in query parameters
+- If you didn't specify ``` category ``` in the query parameter, you will get ***Bad request***.
+- If you want to get a new random question you have to specify ``` prev_question``` in the query parameter, if you didn't specify ``` prev_question``` you will still get a random question but you may get the same question twice
+- If the given category isn't found **OR** doesn't have any questions, you will get ***Not Found***
+- Example: ``` curl http://127.0.0.1:5000/api/quizzes?category=1 ```
+```
+{
+  "question": {
+    "answer": "This is answer",
+    "category": "Science",
+    "difficulty": 5,
+    "id": 16,
+    "question": "This is question"
+  },
+  "status_code": 200,
+  "success": true
+}
+```
+- Example: ``` curl http://127.0.0.1:5000/api/quizzes?category=1&prev_question=16&prev_question=18 ```
+```
+{
+  "question": {
+    "answer": "This is another answer",
+    "category": "Science",
+    "difficulty": 5,
+    "id": 20,
+    "question": "This is another question"
+  },
+  "status_code": 200,
+  "success": true
+}
+```
+- Example when you don't have any questions to get: ``` curl http://127.0.0.1:5000/api/quizzes?category=1&prev_question=16&prev_question=18&prev_question=20 ```
+```
+{
+  "question": null,
+  "status_code": 200,
+  "success": true
+}
+```
